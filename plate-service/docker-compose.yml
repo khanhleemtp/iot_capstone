@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  rabbitmq:
+    image: rabbitmq:3.8-alpine
+    # environment:
+      # - RABBITMQ_DEFAULT_USER=rabbit
+      # - RABBITMQ_DEFAULT_PASS=rabbit
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  plate-service:
+    build: ./plate-service
+    depends_on:
+      - rabbitmq
+    restart: on-failure
